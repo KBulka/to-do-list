@@ -1,11 +1,14 @@
 .task
 {
+  margin-bottom: 5px;
   display: flex;
   justify-content: center;
   width: 300px;
-  outline: 2px solid black;
+  outline: 0.5px solid black;
+  justify-content: space-between;
 }
-.delete
+
+button
 {
-  height: 100%;
+  
 }
