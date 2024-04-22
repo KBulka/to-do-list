@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import TodoSearch from './component/TodoSearch'
-import TodoFilter from './component/TodoFilter'
-import TodoList from './component/Todolist'
+import TodoListDaily from './component/TodoListDaily'
+import TodoListOnetime from './component/TodoListOnetime'
 
 function App() {
 
   let[todos,setTodos] = useState ([
-    {id: 0, task: "Kup drzewo", status: "Active"},
-    {id: 1, task: " Znajdź łanie", status: "Active"},
-    {id: 2, task: "Pościel pustynie", status: "Active"}
+    {id: 0, task: "Kup drzewo", status: "Active", category: "onetime"},
+    {id: 1, task: " Znajdź łanie", status: "Active", category: "onetime"},
+    {id: 2, task: "Pościel pustynie", status: "Active", category: "daily"}
   ])
 
   const addTodo = (data) => {
@@ -23,8 +23,11 @@ function App() {
   return (
   <div className="todo-container">
     <TodoSearch add_todo = {addTodo}/>
-    <TodoFilter />
-    <TodoList todos ={todos} delete_todo = {deleteTodo}/>
+    <div className="todo-list-content">
+       <TodoListDaily todos = {todos} delete_todo = {deleteTodo}/>
+       <TodoListOnetime todos ={todos} delete_todo = {deleteTodo}/>
+    </div>
+   
   </div>
   )
 }
