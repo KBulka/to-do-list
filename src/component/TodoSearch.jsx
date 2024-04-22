@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import Button from 'react-bootstrap/Button'
-import { CFormSelect } from '@coreui/react'
+import { CButtonGroup } from '@coreui/react'
+import { CFormCheck } from '@coreui/react'
+
 
 const TodoSearch = ({ add_todo }) => {
   const { register, handleSubmit, reset } = useForm()
@@ -20,34 +22,38 @@ const TodoSearch = ({ add_todo }) => {
           reset()
         })}
       >
+
         <input
           type="text"
           placeholder="Jakie zadanie szefie?"
           {...register('task', { required: true })}
         />
 
-        <input
+        <CFormCheck
           type="radio"
+          button={{ color: 'primary', variant: 'outline' }}
           name="category"
           id="onetime"
           value="onetime"
           checked={category === 'onetime'}
           onChange={handleCategoryChange}
+          label="Jednorazowe"
         />{' '}
-        <label>Jednorazowe</label>
-        <input
+
+        <CFormCheck
           type="radio"
+          button={{ color: 'primary', variant: 'outline' }}
           name="category"
           id="daily"
           value="daily"
           checked={category === 'daily'}
           onChange={handleCategoryChange}
+          label="Codziennie"
         />{' '}
-        <label>Codziennie</label>
 
         <Button variant="outline-primary" type="submit">
-        Submit
-      </Button>
+          Dodaj Zadanie
+        </Button>
       </form>
     </div>
   )
