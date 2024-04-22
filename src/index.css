@@ -2,6 +2,32 @@ body {
 background-color: rgb(46, 46, 46);
 color: aliceblue;
 }
+.todo-container{
+width: 100%;
+}
+.todo-search{
+  width: 100%;
+padding: 20px;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(31, 31, 31);
+}
+
+.todo-list-content{
+  display: flex;
+  justify-content: center;
+}
+h4{
+ text-align: center;
+ margin-bottom: 20px;
+}
+
+.todo-list{
+  margin: 10px;
+  border: rgb(128, 128, 128) 1px solid;
+  padding: 10px;
+  border-radius: 20px;
+}
 .task
 {
   margin-bottom: 10px;
@@ -13,11 +39,6 @@ color: aliceblue;
   align-items: center;
   background-color: rgb(36, 36, 36);
   border-radius: 6px;
-
-}
-
-.todo-list-content{
-  display: flex;
 }
 .delete{
   padding: 5px;

@@ -8,7 +8,7 @@ import { cilTrash } from '@coreui/icons';
 const TodoListDaily = ({ todos, delete_todo }) => {
   return (
     <div className="todo-list">
-        Zadania Codzienne
+        <h4>Zadania Codzienne</h4>
       {todos.map((todo) =>
         todo.category === 'daily' ? (
           <div className="task" key={todo.id}>

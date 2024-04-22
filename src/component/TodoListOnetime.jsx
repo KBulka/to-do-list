@@ -10,7 +10,7 @@ const TodoListOnetime = ({ todos, delete_todo }) => {
   return (
     <div className="todo-list">
         
-        Zadania Jednorazowe
+       <h4> Zadania Jednorazowe</h4>
       {todos.map((todo) =>
         todo.category === 'onetime' ? (
           <div className="task" key={todo.id}>
