@@ -18,7 +18,6 @@ const TodoListOnetime = ({ todos, delete_todo }) => {
             {todo.task}
             <Button variant="outline-danger" className="delete" onClick={() => delete_todo(todo.id)}>
             <CIcon icon={cilTrash} className="text-danger"  /> 
-
             </Button>
           </div>
         ) : null

@@ -1,6 +1,9 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
+import CIcon from '@coreui/icons-react'
+import { cilTrash } from '@coreui/icons';
+
 
 const TodoListDaily = ({ todos, delete_todo }) => {
   return (
@@ -12,7 +15,7 @@ const TodoListDaily = ({ todos, delete_todo }) => {
                          <Form.Check/>
             {todo.task}
             <Button variant="outline-danger" className="delete" onClick={() => delete_todo(todo.id)}>
-              X
+            <CIcon icon={cilTrash} className="text-danger"  /> 
             </Button>
           </div>
         ) : null
