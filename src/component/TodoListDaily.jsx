@@ -1,4 +1,6 @@
 import React from 'react'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form';
 
 const TodoListDaily = ({ todos, delete_todo }) => {
   return (
@@ -7,11 +9,11 @@ const TodoListDaily = ({ todos, delete_todo }) => {
       {todos.map((todo) =>
         todo.category === 'daily' ? (
           <div className="task" key={todo.id}>
-            <input type="checkbox" />
+                         <Form.Check/>
             {todo.task}
-            <button className="delete" onClick={() => delete_todo(todo.id)}>
+            <Button variant="outline-danger" className="delete" onClick={() => delete_todo(todo.id)}>
               X
-            </button>
+            </Button>
           </div>
         ) : null
       )}

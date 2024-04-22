@@ -1,17 +1,15 @@
+body {
+background-color: rgb(46, 46, 46);
+color: aliceblue;
+}
 .task
 {
   margin-bottom: 5px;
   display: flex;
   justify-content: center;
   width: 300px;
-  outline: 0.5px solid black;
   justify-content: space-between;
 }
 .todo-list-content{
   display: flex;
-}
-
-button
-{
-  
 }

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import TodoSearch from './component/TodoSearch'
 import TodoListDaily from './component/TodoListDaily'
 import TodoListOnetime from './component/TodoListOnetime'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
 
@@ -27,7 +29,6 @@ function App() {
        <TodoListDaily todos = {todos} delete_todo = {deleteTodo}/>
        <TodoListOnetime todos ={todos} delete_todo = {deleteTodo}/>
     </div>
-   
   </div>
   )
 }

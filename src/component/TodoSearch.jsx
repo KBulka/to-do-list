@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import Button from 'react-bootstrap/Button'
 
 const TodoSearch = ({ add_todo }) => {
   const { register, handleSubmit, reset } = useForm()
@@ -43,7 +44,9 @@ const TodoSearch = ({ add_todo }) => {
         />{' '}
         <label>Codziennie</label>
 
-        <button>Add</button>
+        <Button variant="outline-primary" type="submit">
+        Submit
+      </Button>
       </form>
     </div>
   )
