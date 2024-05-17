@@ -11,10 +11,10 @@ const TodoListDaily = ({ todos, delete_todo }) => {
         <h4>Zadania Codzienne</h4>
       {todos.map((todo) =>
         todo.category === 'daily' ? (
-          <div className="task" key={todo.id}>
+          <div className="task" key={todo._id}>
                          <Form.Check/>
             {todo.task}
-            <Button variant="outline-danger" className="delete" onClick={() => delete_todo(todo.id)}>
+            <Button variant="outline-danger" className="delete" onClick={() => delete_todo(todo._id)}>
             <CIcon icon={cilTrash} className="text-danger"  /> 
             </Button>
           </div>
