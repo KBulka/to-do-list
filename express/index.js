@@ -1,53 +1,62 @@
-const express = require ("express")
-const app = express()
-const mongoose = require ("mongoose")
-const cors = require('cors')
-const todos = require("./models/todo")
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require('cors');
+const Todo = require("./models/todo");
 
-app.use(express.json())
-app.use(express.urlencoded())
-app.use(cors())
+const app = express();
 
-mongoose.connect("mongodb://localhost:27017/todo")
-.then (()=> {
-    console.log("Polączono do bazy danych")
-})
-.catch (()=> {
-    console.log("nie udało się podłączyć do ")
-})
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-app.get("/get",(req,res)=>{
-    todos.find({})
-    .then((data)=>{res.send(data)})
-    .catch((err)=>{res.send(err)})
-}) 
+mongoose.connect("mongodb://localhost:27017/todo", { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("Connected to the database");
+  })
+  .catch((error) => {
+    console.error("Failed to connect to the database:", error);
+  });
 
-app.post("/add",(req,res)=>{
-    const newtodo = new todos({
-        task: req.body.task,
-        status: req.body.status,
-        category: req.body.category
-    });
-    newtodo.save()
-    .then(() => res.send("Zapisano"))
-    .catch((err) => res.send("problem jes"));
-}) 
+app.get("/get", async (req, res) => {
+  try {
+    const todos = await Todo.find({});
+    res.json(todos);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching todos", error });
+  }
+});
 
-app.delete("/delete/:id",(req,res)=>{
-    const todoId = req.params.id;
-    
-    todos.findByIdAndDelete(todoId)
-    .then((result) => {
-            if (result) {
-                res.send("Usunięto z sukcessem");
-            } else {
-                res.status(404).send("Nie znaleziono zadania do usunięcia");
-            }
-        })
-        .catch((err) => {
-            console.error("Błąd podczas usuwania:", err);
-            res.status(500).send("Problem przy usuwaniu");
-        });
-})
+app.post('/add', async (req, res) => {
+  const newTodo = new Todo({
+    task: req.body.task,
+    category: req.body.category,
+    status: "Active",
+  });
 
-app.listen(3001)
+  try {
+    const savedTodo = await newTodo.save();
+    res.json(savedTodo);
+  } catch (err) {
+    res.status(500).json({ message: "Error adding todo", error: err });
+  }
+});
+
+app.delete("/delete/:id", async (req, res) => {
+  const todoId = req.params.id;
+
+  try {
+    const result = await Todo.findByIdAndDelete(todoId);
+    if (result) {
+      res.json({ message: "Todo successfully deleted" });
+    } else {
+      res.status(404).json({ message: "Todo not found" });
+    }
+  } catch (err) {
+    console.error("Error deleting todo:", err);
+    res.status(500).json({ message: "Error deleting todo", error: err });
+  }
+});
+
+app.listen(3001, () => {
+  console.log("Server is running on port 3001");
+});

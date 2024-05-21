@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from './component/redux/store';
 import { setTodos, addTodo, deleteTodo } from './component/redux/todosSlice';
@@ -24,7 +24,7 @@ const App: React.FC = () => {
   }, [dispatch]);
 
   const addNewTodo = (data: { task: string; category: string }) => {
-    const newTodo: Todo = {
+    const newTodo: Partial<Todo> = {
       task: data.task,
       category: data.category,
       status: "Active"
@@ -32,8 +32,9 @@ const App: React.FC = () => {
 
     axios.post("http://localhost:3001/add", newTodo)
       .then((response) => {
-        console.log(response);
-        dispatch(addTodo(newTodo));
+        const addedTodo: Todo = response.data; // Make sure the response contains the new todo with the `_id`
+        dispatch(addTodo(addedTodo));
+        console.log(addedTodo);
       });
     console.log(data);
   };
