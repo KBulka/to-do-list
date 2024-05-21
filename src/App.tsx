@@ -1,32 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from './component/redux/store';
-import { increment, decrement } from './component/redux/actions';
+import { setTodos, addTodo, deleteTodo } from './component/redux/todosSlice';
 import TodoSearch from './component/TodoSearch';
 import TodoListDaily from './component/TodoListDaily';
 import TodoListOnetime from './component/TodoListOnetime';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
-import { Todo } from './component/redux/types'
-
+import { Todo } from './component/redux/types';
 
 const App: React.FC = () => {
-  const count = useSelector((state: RootState) => state.count);
-  const dispatch: AppDispatch = useDispatch();
-
-  const [todos, setTodos] = useState<Todo[]>([]); 
+  const dispatch = useDispatch<AppDispatch>();
+  const todos = useSelector((state: RootState) => state.todos.todos);
 
   useEffect(() => {
     axios.get("http://localhost:3001/get")
       .then((response) => {
         const data: Todo[] = response.data;
-        setTodos(data);
+        dispatch(setTodos(data));
         console.log(data);
       });
-  }, []);
+  }, [dispatch]);
 
-  const addTodo = (data: { task: string; category: string }) => {
+  const addNewTodo = (data: { task: string; category: string }) => {
     const newTodo: Todo = {
       task: data.task,
       category: data.category,
@@ -36,12 +33,12 @@ const App: React.FC = () => {
     axios.post("http://localhost:3001/add", newTodo)
       .then((response) => {
         console.log(response);
-        setTodos([...todos, newTodo]);
+        dispatch(addTodo(newTodo));
       });
     console.log(data);
   };
 
-  const deleteTodo = (_id: string) => {
+  const removeTodo = (_id: string) => {
     if (!_id) {
       console.error("ID is not defined");
       return;
@@ -50,7 +47,7 @@ const App: React.FC = () => {
     axios.delete(`http://localhost:3001/delete/${_id}`)
       .then((response) => {
         console.log(response);
-        setTodos(todos.filter(todo => todo._id !== _id));
+        dispatch(deleteTodo(_id));
       })
       .catch((error) => {
         console.error("There was an error deleting the todo!", error);
@@ -59,14 +56,11 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1>{count}</h1>
-      <button onClick={() => dispatch(increment())}>Increment</button>
-      <button onClick={() => dispatch(decrement())}>Decrement</button>
       <div className="todo-container">
-        <TodoSearch add_todo={addTodo} />
+        <TodoSearch add_todo={addNewTodo} />
         <div className="todo-list-content">
-          <TodoListDaily todos={todos} delete_todo={deleteTodo} />
-          <TodoListOnetime todos={todos} delete_todo={deleteTodo} />
+          <TodoListDaily todos={todos} delete_todo={removeTodo} />
+          <TodoListOnetime todos={todos} delete_todo={removeTodo} />
         </div>
       </div>
     </div>

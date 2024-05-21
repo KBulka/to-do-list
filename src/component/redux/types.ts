@@ -5,7 +5,3 @@ export interface Todo {
   status: string;
 }
 
-export interface TodoState {
-  todos: Todo[];
-}
-
