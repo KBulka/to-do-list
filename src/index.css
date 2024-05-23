@@ -47,3 +47,32 @@ h4{
   width: 40px;
 }
 
+.foot{
+  background-color:  rgb(20, 20, 20);
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 0px;
+}
+.foot:hover{
+  background-color:  rgb(100, 100, 100);
+  transition: 0.3s;
+}
+a:link {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+a:visited {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+a:hover {
+  text-decoration: underline;
+
+}
+
+a:active {
+  text-decoration: underline;
+}

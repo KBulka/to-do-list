@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-mongoose.connect("mongodb://localhost:27017/todo", { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect("mongodb+srv://admin:proste123@todo.fwrhgri.mongodb.net/", { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("Connected to the database");
   })
