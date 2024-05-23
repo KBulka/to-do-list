@@ -7,6 +7,8 @@ import TodoListDaily from './component/TodoListDaily';
 import TodoListOnetime from './component/TodoListOnetime';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 import { Todo } from './component/redux/types';
 
@@ -57,6 +59,7 @@ const App: React.FC = () => {
 
   return (
     <div>
+        <Link to="/">Home</Link>
       <div className="todo-container">
         <TodoSearch add_todo={addNewTodo} />
         <div className="todo-list-content">
